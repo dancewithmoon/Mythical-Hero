@@ -16,7 +16,15 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 3335f5eea95d04a479b18baeb932be85
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: dd4f4d12e717fa541bada02289cbb246
+    m_Address: Screens
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7f63450bf622d574799a70e5a4b0d23b
+    m_Address: UIRoot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c27fffc7726bee24ca4f0a28048f2b3b, type: 2}
   m_SchemaSet:
