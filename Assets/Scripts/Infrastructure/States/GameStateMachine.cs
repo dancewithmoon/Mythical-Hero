@@ -20,13 +20,19 @@ namespace Scripts.Infrastructure.States
             {
                 [typeof(BootstrapState)] = 
                     new BootstrapState(this, sceneLoader, staticData),
-
+                
                 [typeof(LoadProgressState)] = 
-                    new LoadProgressState(this, progress, saveLoad, staticData),
-
+                    new LoadProgressState(this, progress, saveLoad),
+                
+                [typeof(LoadMainMenuState)] = 
+                    new LoadMainMenuState(this, sceneLoader),
+                
+                [typeof(MainMenuState)] = 
+                    new MainMenuState(),
+                
                 [typeof(LoadLevelState)] = 
-                    new LoadLevelState(this, sceneLoader, gameFactory, progress, staticData, uiFactory),
-
+                    new LoadLevelState(this, sceneLoader, gameFactory, uiFactory),
+                
                 [typeof(GameLoopState)] = 
                     new GameLoopState(this)
             };
@@ -52,9 +58,7 @@ namespace Scripts.Infrastructure.States
             return newState;
         }
 
-        private TState GetState<TState>() where TState : class, IExitableState
-        {
-            return _states[typeof(TState)] as TState;
-        }
+        private TState GetState<TState>() where TState : class, IExitableState => 
+            _states[typeof(TState)] as TState;
     }
 }

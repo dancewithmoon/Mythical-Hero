@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Scripts.Infrastructure.Factory;
-using Scripts.Infrastructure.Services.PersistentProgress;
-using Scripts.StaticData.Service;
 using Scripts.UI.Services.Factory;
 
 namespace Scripts.Infrastructure.States
@@ -11,29 +9,22 @@ namespace Scripts.Infrastructure.States
         private readonly IGameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly IGameFactory _gameFactory;
-        private readonly IPersistentProgressService _progress;
-        private readonly IStaticDataService _staticData;
         private readonly IUIFactory _uiFactory;
-
-        private string _sceneName;
+        
         private Task _warmUp;
 
         public LoadLevelState(IGameStateMachine stateMachine, SceneLoader sceneLoader, 
-            IGameFactory gameFactory, IPersistentProgressService progress, IStaticDataService staticData,
+            IGameFactory gameFactory,
             IUIFactory uiFactory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
-            _progress = progress;
-            _staticData = staticData;
             _uiFactory = uiFactory;
         }
 
         public void Enter(string sceneName)
         {
-            _sceneName = sceneName;
-            
             _gameFactory.CleanUp();
             
             _warmUp = WarmUp();
