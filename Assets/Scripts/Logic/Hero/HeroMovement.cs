@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Logic
+namespace Scripts.Logic.Hero
 {
     [RequireComponent(typeof(CharacterController))]
     public class HeroMovement : MonoBehaviour
