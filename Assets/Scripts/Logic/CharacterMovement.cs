@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace Scripts.Logic.Hero
+namespace Scripts.Logic
 {
     [RequireComponent(typeof(CharacterController))]
-    public class HeroMovement : MonoBehaviour
+    public class CharacterMovement : MonoBehaviour
     {
         [SerializeField] private float _speed;
         private CharacterController _characterController;
