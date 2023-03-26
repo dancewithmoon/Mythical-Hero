@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace Scripts.Hero
 {
+    [RequireComponent(typeof(Animator))]
     public class HeroAnimator : MonoBehaviour, IAnimatorStateReader
     {
+        private static readonly int AttackHash = Animator.StringToHash("Attack");
+        
         private readonly int _runStateHash = Animator.StringToHash("Run");
         private readonly int _attack1StateHash = Animator.StringToHash("Attack1");
         private readonly int _attack2StateHash = Animator.StringToHash("Attack2");
@@ -13,6 +16,7 @@ namespace Scripts.Hero
         private readonly int _stunHash = Animator.StringToHash("Stun");
         private readonly int _debuffHash = Animator.StringToHash("Debuff");
 
+        private Animator _animator;
         private AnimatorState _state;
 
         public event Action<AnimatorState> StateEntered;
@@ -31,6 +35,12 @@ namespace Scripts.Hero
                 StateEntered?.Invoke(_state);
             }
         }
+
+        private void Awake() => 
+            _animator = GetComponent<Animator>();
+
+        public void SetAttackValue(bool value) => 
+            _animator.SetBool(AttackHash, value);
 
         public void EnteredState(int stateHash) => 
             State = GetStateByHash(stateHash);
