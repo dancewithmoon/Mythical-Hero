@@ -772,7 +772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7959485200577384032, guid: cc8d6d8a21c11fa47ac5c067f9433e0f, type: 3}
       propertyPath: m_Name
-      value: BaseEnemy
+      value: Lich
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc8d6d8a21c11fa47ac5c067f9433e0f, type: 3}
