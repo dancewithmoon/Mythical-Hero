@@ -482,6 +482,7 @@ MonoBehaviour:
   _pushbackDuration: 0.25
   _pushbackDirection: -1
   _stunDuration: 0.5
+  _animator: {fileID: 8039817727712484278}
 --- !u!1 &6229006255639336193
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,9 +5,10 @@ using UnityEngine;
 namespace Scripts.Hero
 {
     [RequireComponent(typeof(Animator))]
-    public class HeroAnimator : MonoBehaviour, IAnimatorStateReader
+    public class HeroAnimator : CharacterAnimator, IAnimatorStateReader
     {
-        private static readonly int AttackHash = Animator.StringToHash("Attack");
+        private static readonly int AttackParameterHash = Animator.StringToHash("Attack");
+        private static readonly int StunParameterHash = Animator.StringToHash("ToStun");
         
         private readonly int _runStateHash = Animator.StringToHash("Run");
         private readonly int _attack1StateHash = Animator.StringToHash("Attack1");
@@ -39,8 +40,11 @@ namespace Scripts.Hero
         private void Awake() => 
             _animator = GetComponent<Animator>();
 
-        public void SetAttackValue(bool value) => 
-            _animator.SetBool(AttackHash, value);
+        public override void SetAttackValue(bool value) => 
+            _animator.SetBool(AttackParameterHash, value);
+
+        public override void SetStunTrigger() => 
+            _animator.SetTrigger(StunParameterHash);
 
         public void EnteredState(int stateHash) => 
             State = GetStateByHash(stateHash);
