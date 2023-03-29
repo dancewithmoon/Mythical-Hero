@@ -1,8 +1,8 @@
-﻿using Scripts.Logic;
+﻿using Scripts.Logic.Hero.Animations;
 using Scripts.Utils;
 using UnityEngine;
 
-namespace Scripts.Hero
+namespace Scripts.Logic.Hero
 {
     [RequireComponent(typeof(CharacterMovement), typeof(CharacterDamage))]
     [RequireComponent(typeof(HeroAnimator), typeof(HeroAnimationEventHandler))]

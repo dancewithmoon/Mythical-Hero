@@ -1,4 +1,4 @@
-namespace Scripts.Hero
+namespace Scripts.Logic.Hero.Animations
 {
     public enum AnimatorState
     {

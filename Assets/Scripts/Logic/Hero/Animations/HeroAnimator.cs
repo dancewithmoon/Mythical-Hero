@@ -2,7 +2,7 @@ using System;
 using Scripts.Logic.Animations;
 using UnityEngine;
 
-namespace Scripts.Hero
+namespace Scripts.Logic.Hero.Animations
 {
     [RequireComponent(typeof(Animator))]
     public class HeroAnimator : CharacterAnimator, IAnimatorStateReader

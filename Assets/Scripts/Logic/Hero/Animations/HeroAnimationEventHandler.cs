@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Scripts.Hero
+namespace Scripts.Logic.Hero.Animations
 {
     public class HeroAnimationEventHandler : MonoBehaviour
     {
