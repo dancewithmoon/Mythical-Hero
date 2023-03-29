@@ -51,9 +51,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4595022550836719423, guid: 832380eb6bc661f43bc3f4deb6e23c74, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 7734570495592943595}
     - target: {fileID: 7792519687889454887, guid: 832380eb6bc661f43bc3f4deb6e23c74, type: 3}
       propertyPath: m_Name
       value: Lich
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 832380eb6bc661f43bc3f4deb6e23c74, type: 3}
+--- !u!1 &2727712100367277081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2849535518942319966, guid: 832380eb6bc661f43bc3f4deb6e23c74, type: 3}
+  m_PrefabInstance: {fileID: 167005649979787591}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7734570495592943595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727712100367277081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de4359bec2244096a7bd4b05f6b0afe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
