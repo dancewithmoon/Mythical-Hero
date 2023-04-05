@@ -6,5 +6,6 @@ namespace Scripts.Logic.Animations
     {
         public abstract void SetAttackValue(bool value);
         public abstract void SetStunTrigger();
+        public abstract void SetDeathTrigger();
     }
 }

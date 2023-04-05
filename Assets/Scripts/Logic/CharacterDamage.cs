@@ -25,10 +25,16 @@ namespace Scripts.Logic
             _movement = GetComponent<CharacterMovement>();
             _characterController = GetComponent<CharacterController>();
         }
+        
+        private void OnDisable() => StopAllCoroutines();
 
         public void ApplyDamage(int amount)
         {
             StopAllCoroutines();
+            
+            if(enabled == false)
+                return;
+            
             _health.ApplyDamage(amount);
             StartCoroutine(ApplyDamageCoroutine());
         }

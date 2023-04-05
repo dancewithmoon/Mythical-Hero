@@ -9,7 +9,8 @@ namespace Scripts.Logic.Hero.Animations
     {
         private static readonly int AttackParameterHash = Animator.StringToHash("Attack");
         private static readonly int StunParameterHash = Animator.StringToHash("ToStun");
-        
+        private static readonly int DeathParameterHash = Animator.StringToHash("Death");
+
         private readonly int _runStateHash = Animator.StringToHash("Run");
         private readonly int _attack1StateHash = Animator.StringToHash("Attack1");
         private readonly int _attack2StateHash = Animator.StringToHash("Attack2");
@@ -43,8 +44,16 @@ namespace Scripts.Logic.Hero.Animations
         public override void SetAttackValue(bool value) => 
             _animator.SetBool(AttackParameterHash, value);
 
-        public override void SetStunTrigger() => 
+        public override void SetStunTrigger()
+        {
+            if(_animator.GetBool(DeathParameterHash))
+                return;
+            
             _animator.SetTrigger(StunParameterHash);
+        }
+
+        public override void SetDeathTrigger() => 
+            _animator.SetTrigger(DeathParameterHash);
 
         public void EnteredState(int stateHash) => 
             State = GetStateByHash(stateHash);

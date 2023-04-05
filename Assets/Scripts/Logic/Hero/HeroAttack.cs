@@ -34,6 +34,7 @@ namespace Scripts.Logic.Hero
         {
             _trigger.TriggerEnter -= OnTargetEnteredAttackZone;
             _animationEventHandler.Attacked -= OnAttackHandled;
+            StopAllCoroutines();
         }
 
         private void OnTargetEnteredAttackZone(Collider target)

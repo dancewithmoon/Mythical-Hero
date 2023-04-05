@@ -8,6 +8,7 @@ namespace Scripts.Logic.Enemy.Animations
     {
         private static readonly int AttackParameterHash = Animator.StringToHash("Attack");
         private static readonly int StunParameterHash = Animator.StringToHash("ToStun");
+        private static readonly int DeathParameterHash = Animator.StringToHash("Death");
         
         private Animator _animator;
 
@@ -19,5 +20,8 @@ namespace Scripts.Logic.Enemy.Animations
 
         public override void SetStunTrigger() => 
             _animator.SetTrigger(StunParameterHash);
+
+        public override void SetDeathTrigger() => 
+            _animator.SetTrigger(DeathParameterHash);
     }
 }
