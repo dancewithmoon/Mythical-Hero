@@ -29,7 +29,14 @@ namespace Scripts.Infrastructure.States
         private void LoadProgressOrInitNew() => 
             _progressService.Progress = _saveLoadService.LoadProgress() ?? InitNewProgress();
 
-        private PlayerProgress InitNewProgress() => 
-            new PlayerProgress();
+        private PlayerProgress InitNewProgress() =>
+            new PlayerProgress
+            {
+                Health =
+                {
+                    Max = 50,
+                    Current = 50
+                }
+            };
     }
 }

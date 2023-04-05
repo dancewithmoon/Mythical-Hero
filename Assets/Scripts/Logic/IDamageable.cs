@@ -2,6 +2,6 @@
 {
     public interface IDamageable
     {
-        void ApplyDamage();
+        void ApplyDamage(int amount);
     }
 }

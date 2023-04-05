@@ -15,6 +15,7 @@ namespace Scripts.Logic
         
         [Header("Components")]
         [SerializeField] private CharacterAnimator _animator;
+        [SerializeField] private Health _health;
         
         private CharacterMovement _movement;
         private CharacterController _characterController;
@@ -25,9 +26,10 @@ namespace Scripts.Logic
             _characterController = GetComponent<CharacterController>();
         }
 
-        public void ApplyDamage()
+        public void ApplyDamage(int amount)
         {
             StopAllCoroutines();
+            _health.ApplyDamage(amount);
             StartCoroutine(ApplyDamageCoroutine());
         }
 

@@ -8,6 +8,7 @@ namespace Scripts.Logic.Hero
     [RequireComponent(typeof(HeroAnimator), typeof(HeroAnimationEventHandler))]
     public class HeroAttack : MonoBehaviour
     {
+        [SerializeField] private int _damageAmount;
         [SerializeField] private TriggerObserver _trigger;
         private CharacterMovement _heroMovement;
         private CharacterDamage _heroDamage;
@@ -54,8 +55,8 @@ namespace Scripts.Logic.Hero
         {
             foreach (GameObject target in _trigger.TriggeredObjects)
             {
-                target.GetComponent<IDamageable>().ApplyDamage();
-                _heroDamage.ApplyDamage();
+                target.GetComponent<IDamageable>().ApplyDamage(_damageAmount);
+                _heroDamage.ApplyDamage(_damageAmount);
             }
         }
     }
