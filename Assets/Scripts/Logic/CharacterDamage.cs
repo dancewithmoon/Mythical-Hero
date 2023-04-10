@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Scripts.Logic.Animations;
+using Scripts.Utils;
 using UnityEngine;
 
 namespace Scripts.Logic
@@ -13,15 +14,15 @@ namespace Scripts.Logic
         [SerializeField] private Direction _pushbackDirection;
         [SerializeField] private float _stunDuration = 0.5f;
         
-        [Header("Components")]
-        [SerializeField] private CharacterAnimator _animator;
-        [SerializeField] private Health _health;
-        
+        private CharacterAnimator _animator;
+        private Health _health;
         private CharacterMovement _movement;
         private CharacterController _characterController;
 
         private void Awake()
         {
+            _animator = this.GetComponentInChildrenForSure<CharacterAnimator>();
+            _health = this.GetComponentInChildrenForSure<Health>();
             _movement = GetComponent<CharacterMovement>();
             _characterController = GetComponent<CharacterController>();
         }

@@ -1,25 +1,22 @@
-﻿using Scripts.Logic.Animations;
-using Scripts.Logic.Hero;
+﻿using System.Collections.Generic;
+using Scripts.Logic.Animations;
 using Scripts.Utils;
 using UnityEngine;
 
 namespace Scripts.Logic
 {
-    [RequireComponent(typeof(CharacterMovement), typeof(CharacterDamage), typeof(CharacterController))]
+    [RequireComponent(typeof(CharacterController))]
     public class CharacterDeath : MonoBehaviour
     {
-        [SerializeField] private HeroAttack _attack; //TODO: Need more abstraction
-        
-        [SerializeField] private Health _health;
-        [SerializeField] private CharacterAnimator _animator;
-        private CharacterMovement _movement;
-        private CharacterDamage _damage;
+        [SerializeField] private List<MonoBehaviour> _componentsToDisable;
+        private Health _health;
+        private CharacterAnimator _animator;
         private CharacterController _characterController;
 
         private void Awake()
         {
-            _movement = GetComponent<CharacterMovement>();
-            _damage = GetComponent<CharacterDamage>();
+            _health = this.GetComponentInChildrenForSure<Health>();
+            _animator = this.GetComponentInChildrenForSure<CharacterAnimator>();
             _characterController = GetComponent<CharacterController>();
         }
 
@@ -47,14 +44,8 @@ namespace Scripts.Logic
 
         private void DisableComponents()
         {
-            if (_attack != null)
-            {
-                _attack.enabled = false;
-            }
-            
-            _movement.enabled = false;
-            _damage.enabled = false;
             _characterController.enabled = false;
+            _componentsToDisable.ForEach(component => component.enabled = false);
         }
     }
 }

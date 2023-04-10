@@ -16,5 +16,16 @@ namespace Scripts.Utils
             
             return obj.StartCoroutine(DoWithDelayCoroutine());
         }
+
+        public static T GetComponentInChildrenForSure<T>(this MonoBehaviour obj) where T : Component
+        {
+            T component = obj.GetComponentInChildren<T>();
+            if (component == null)
+            {
+                throw new NullReferenceException($"{typeof(T)} not found");
+            }
+
+            return component;
+        }
     }
 }

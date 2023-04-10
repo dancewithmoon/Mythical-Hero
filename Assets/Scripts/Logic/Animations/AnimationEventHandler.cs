@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Scripts.Logic.Hero.Animations
+namespace Scripts.Logic.Animations
 {
-    public class HeroAnimationEventHandler : MonoBehaviour
+    public class AnimationEventHandler : MonoBehaviour
     {
         public event Action Attacked;
 

@@ -726,6 +726,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1652786669, guid: cc8d6d8a21c11fa47ac5c067f9433e0f, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2849607949308436585, guid: cc8d6d8a21c11fa47ac5c067f9433e0f, type: 3}
       propertyPath: m_RootOrder
       value: 6

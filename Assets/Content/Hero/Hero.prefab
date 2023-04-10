@@ -395,13 +395,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Bip001 L Toe0'\n\tTransform 'Bip001 L Calf'\n\tTransform
-    'Bip001 R Forearm'\n\tTransform 'Bip001 L Forearm'\n\tTransform 'Bip001 Neck'\n\tTransform
-    'Bip001 L Foot'\n\tTransform 'Bip001 L Hand'\n\tTransform 'Bip001 R Toe0'\n\tTransform
-    'Bip001 L Finger11'\n\tTransform 'Bip001 R Thigh'\n\tand more ...\n\tFrom animation
-    clip 'Death'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -491,8 +485,6 @@ MonoBehaviour:
   _pushbackDuration: 0.25
   _pushbackDirection: -1
   _stunDuration: 0.5
-  _animator: {fileID: 8039817727712484278}
-  _health: {fileID: 1481086580136691356}
 --- !u!114 &1481086580136691356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,9 +509,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1412453f624741fcbf06ef636e2c3143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attack: {fileID: 1549517179}
-  _health: {fileID: 1481086580136691356}
-  _animator: {fileID: 8039817727712484278}
+  _componentsToDisable:
+  - {fileID: 370021877}
+  - {fileID: 4174376977650417402}
+  - {fileID: 1549517179}
 --- !u!1 &6229006255639336193
 GameObject:
   m_ObjectHideFlags: 0
