@@ -1,4 +1,5 @@
 ﻿using Scripts.Logic.Animations;
+using Scripts.Logic.Enemy;
 using Scripts.Utils;
 using UnityEngine;
 
@@ -53,12 +54,14 @@ namespace Scripts.Logic.Hero
 
         private void OnAttackHandled()
         {
+            int damageBack = 0;
             foreach (GameObject target in _trigger.TriggeredObjects)
             {
                 target.GetComponent<IDamageable>().ApplyDamage(_damageAmount);
+                damageBack += target.GetComponent<EnemyAttack>().DamageAmount;
             }
 
-            _selfDamage.ApplyDamage(_damageAmount);
+            _selfDamage.ApplyDamage(damageBack);
         }
     }
 }
