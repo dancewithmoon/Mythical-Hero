@@ -9,11 +9,10 @@ namespace Scripts.Logic
     public class CharacterDamage : MonoBehaviour, IDamageable
     {
         [Header("Parameters")]
-        [SerializeField] private float _pushbackForce = 3;
         [SerializeField] private float _pushbackDuration = 0.25f;
         [SerializeField] private Direction _pushbackDirection;
         [SerializeField] private float _stunDuration = 0.5f;
-        
+        private float _pushbackForce;
         private CharacterAnimator _animator;
         private Health _health;
         private CharacterMovement _movement;
@@ -37,6 +36,8 @@ namespace Scripts.Logic
                 return;
             
             _health.ApplyDamage(amount);
+            
+            _pushbackForce = amount;
             StartCoroutine(ApplyDamageCoroutine());
         }
 
