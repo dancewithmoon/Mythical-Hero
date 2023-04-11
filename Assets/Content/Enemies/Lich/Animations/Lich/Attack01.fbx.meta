@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: ce43f40fc2027a949a58e385c6a2cd1f
 ModelImporter:
-  serializedVersion: 20101
+  serializedVersion: 20300
   internalIDToNameTable:
   - first:
       1: 100000
@@ -214,13 +214,6 @@ ModelImporter:
       events:
       - time: 0.3596037
         functionName: OnAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 1
-        functionName: OnAttackEnded
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -598,6 +591,8 @@ ModelImporter:
   animationType: 3
   humanoidOversampling: 1
   avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
