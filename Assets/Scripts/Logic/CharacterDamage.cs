@@ -18,6 +18,8 @@ namespace Scripts.Logic
         private CharacterMovement _movement;
         private CharacterController _characterController;
 
+        public bool IsGettingDamage { get; private set; }
+        
         private void Awake()
         {
             _animator = this.GetComponentInChildrenForSure<CharacterAnimator>();
@@ -30,21 +32,24 @@ namespace Scripts.Logic
 
         public void ApplyDamage(int amount)
         {
-            StopAllCoroutines();
-            
             if(enabled == false)
                 return;
             
-            _health.ApplyDamage(amount);
+            if(IsGettingDamage)
+                return;
             
             _pushbackForce = amount;
+            
             StartCoroutine(ApplyDamageCoroutine());
+            
+            _health.ApplyDamage(amount);
         }
 
         private IEnumerator ApplyDamageCoroutine()
         {
+            IsGettingDamage = true;
             _movement.enabled = false;
-            
+
             if (_animator)
             {
                 _animator.SetStunTrigger();
@@ -52,7 +57,8 @@ namespace Scripts.Logic
 
             yield return StartCoroutine(ExecutePushback());
             yield return StartCoroutine(ExecuteStun());
-            
+
+            IsGettingDamage = false;
             _movement.enabled = true;
         }
 

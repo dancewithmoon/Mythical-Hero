@@ -467,7 +467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ad770f6efa642f8af739abe0305e079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageAmount: 1
+  _cooldown: 1
+  _damageAmount: 5
   _trigger: {fileID: 2611937829138419244}
 --- !u!114 &4174376977650417402
 MonoBehaviour:
@@ -481,10 +482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf4ab65cdbb423a895a7fb44bbb760a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pushbackForce: 6
   _pushbackDuration: 0.25
   _pushbackDirection: -1
-  _stunDuration: 0.5
+  _stunDuration: 0.25
 --- !u!114 &1481086580136691356
 MonoBehaviour:
   m_ObjectHideFlags: 0

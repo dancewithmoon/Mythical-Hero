@@ -1,5 +1,8 @@
-﻿using Scripts.Logic.Animations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Scripts.Logic.Animations;
 using Scripts.Logic.Enemy;
+using Scripts.Logic.Hero.Animations;
 using Scripts.Utils;
 using UnityEngine;
 
@@ -8,60 +11,81 @@ namespace Scripts.Logic.Hero
     [RequireComponent(typeof(CharacterMovement), typeof(CharacterDamage))]
     public class HeroAttack : MonoBehaviour
     {
+        [SerializeField] private float _cooldown = 1f;
         [SerializeField] private int _damageAmount;
         [SerializeField] private TriggerObserver _trigger;
         private CharacterMovement _movement;
         private CharacterDamage _selfDamage;
-        private CharacterAnimator _animator;
+        private HeroAnimator _animator;
         private AnimationEventHandler _animationEventHandler;
 
         private void Awake()
         {
             _movement = GetComponent<CharacterMovement>();
             _selfDamage = GetComponent<CharacterDamage>();
-            _animator = this.GetComponentInChildrenForSure<CharacterAnimator>();
+            _animator = this.GetComponentInChildrenForSure<HeroAnimator>();
             _animationEventHandler = this.GetComponentInChildrenForSure<AnimationEventHandler>();
         }
 
         private void OnEnable()
         {
-            _trigger.TriggerEnter += OnTargetEnteredAttackZone;
-            _trigger.TriggerExit += OnTargetExitAttackZone;
             _animationEventHandler.Attacked += OnAttackHandled;
         }
 
         private void OnDisable()
         {
-            _trigger.TriggerEnter -= OnTargetEnteredAttackZone;
             _animationEventHandler.Attacked -= OnAttackHandled;
             StopAllCoroutines();
         }
 
-        private void OnTargetEnteredAttackZone(Collider target)
+        private void Start() => 
+            StartCoroutine(WaitForEnemyAndAttack());
+
+        private IEnumerator WaitForEnemyAndAttack()
+        {
+            while (this != null)
+            {
+                yield return new WaitUntil(IsAnyEnemyDetected);
+                StartAttack();
+                yield return new WaitForSeconds(_cooldown);
+            }
+        }
+
+        private void StartAttack()
         {
             _movement.enabled = false;
-            _animator.SetAttackValue(true);
+            _animator.SetAttackTrigger();
         }
-
-        private void OnTargetExitAttackZone(Collider target)
-        {
-            _animator.SetAttackValue(false);
-            this.Invoke(StopAttack, 0.5f);
-        }
-
-        private void StopAttack() =>
-            _movement.enabled = true;
 
         private void OnAttackHandled()
         {
-            int damageBack = 0;
-            foreach (GameObject target in _trigger.TriggeredObjects)
+            List<GameObject> targets = new List<GameObject>(_trigger.TriggeredObjects);
+
+            Attack(targets, out int damageBack);
+            
+            if (AreSomeTargetsStillAlive(targets))
+            {
+                _selfDamage.ApplyDamage(damageBack);
+            }
+            else
+            {
+                _movement.enabled = true;
+            }
+        }
+
+        private void Attack(List<GameObject> targets, out int damageBack)
+        {
+            damageBack = 0;
+            foreach (GameObject target in targets)
             {
                 target.GetComponent<IDamageable>().ApplyDamage(_damageAmount);
                 damageBack += target.GetComponent<EnemyAttack>().DamageAmount;
             }
-
-            _selfDamage.ApplyDamage(damageBack);
         }
+
+        private bool IsAnyEnemyDetected() => _trigger.TriggeredObjects.Count > 0;
+
+        private static bool AreSomeTargetsStillAlive(List<GameObject> targets) => 
+            targets.Exists(target => target.GetComponent<CharacterDeath>().IsDead == false);
     }
 }

@@ -1,23 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using DG.Tweening;
 using Scripts.Logic.Animations;
 using Scripts.Utils;
 using UnityEngine;
 
 namespace Scripts.Logic
 {
-    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(CharacterController), typeof(CharacterDamage))]
     public class CharacterDeath : MonoBehaviour
     {
         [SerializeField] private List<MonoBehaviour> _componentsToDisable;
         private Health _health;
         private CharacterAnimator _animator;
-        private CharacterController _characterController;
+
+        public bool IsDead { get; private set; }
+
+        public event Action Dead;
 
         private void Awake()
         {
             _health = this.GetComponentInChildrenForSure<Health>();
             _animator = this.GetComponentInChildrenForSure<CharacterAnimator>();
-            _characterController = GetComponent<CharacterController>();
         }
 
         private void OnEnable() => 
@@ -36,15 +40,16 @@ namespace Scripts.Logic
 
         private void Die()
         {
+            IsDead = true;
             _animator.SetDeathTrigger();
-
-            this.Invoke(DisableComponents, 0.6f);
+            DisableComponents();
             Destroy(gameObject, 2f);
+            Dead?.Invoke();
         }
 
         private void DisableComponents()
         {
-            _characterController.enabled = false;
+            enabled = false;
             _componentsToDisable.ForEach(component => component.enabled = false);
         }
     }

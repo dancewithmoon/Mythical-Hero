@@ -12,8 +12,7 @@ namespace Scripts.Logic.Hero.Animations
         private static readonly int DeathParameterHash = Animator.StringToHash("Death");
 
         private readonly int _runStateHash = Animator.StringToHash("Run");
-        private readonly int _attack1StateHash = Animator.StringToHash("Attack1");
-        private readonly int _attack2StateHash = Animator.StringToHash("Attack2");
+        private readonly int _attackStateHash = Animator.StringToHash("Attack");
         private readonly int _skillHash = Animator.StringToHash("Skill");
         private readonly int _stunHash = Animator.StringToHash("Stun");
         private readonly int _debuffHash = Animator.StringToHash("Debuff");
@@ -41,8 +40,8 @@ namespace Scripts.Logic.Hero.Animations
         private void Awake() => 
             _animator = GetComponent<Animator>();
 
-        public override void SetAttackValue(bool value) => 
-            _animator.SetBool(AttackParameterHash, value);
+        public override void SetAttackTrigger() => 
+            _animator.SetTrigger(AttackParameterHash);
 
         public override void SetStunTrigger()
         {
@@ -65,7 +64,7 @@ namespace Scripts.Logic.Hero.Animations
             if (stateHash == _runStateHash)
                 return AnimatorState.Run;
             
-            if (stateHash == _attack1StateHash || stateHash == _attack2StateHash)
+            if (stateHash == _attackStateHash)
                 return AnimatorState.Attack;
             
             if (stateHash == _skillHash)

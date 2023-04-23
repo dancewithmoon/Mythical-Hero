@@ -15,8 +15,8 @@ namespace Scripts.Logic.Enemy.Animations
         private void Awake() => 
             _animator = GetComponent<Animator>();
 
-        public override void SetAttackValue(bool value) => 
-            _animator.SetBool(AttackParameterHash, value);
+        public override void SetAttackTrigger() => 
+            _animator.SetTrigger(AttackParameterHash);
 
         public override void SetStunTrigger() => 
             _animator.SetTrigger(StunParameterHash);
