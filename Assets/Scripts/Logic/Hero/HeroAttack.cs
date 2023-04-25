@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripts.Infrastructure.Services.PersistentProgress;
 using Scripts.Logic.Animations;
 using Scripts.Logic.Enemy;
 using Scripts.Logic.Hero.Animations;
 using Scripts.Utils;
 using UnityEngine;
+using Zenject;
 
 namespace Scripts.Logic.Hero
 {
@@ -12,25 +14,26 @@ namespace Scripts.Logic.Hero
     public class HeroAttack : MonoBehaviour
     {
         [SerializeField] private float _cooldown = 1f;
-        [SerializeField] private int _damageAmount;
         [SerializeField] private TriggerObserver _trigger;
+        private int _damageAmount;
         private CharacterMovement _movement;
         private CharacterDamage _selfDamage;
         private HeroAnimator _animator;
         private AnimationEventHandler _animationEventHandler;
 
-        private void Awake()
+        [Inject]
+        private void Construct(IPersistentProgressService progressService)
         {
+            _damageAmount = progressService.Progress.Damage;
+            
             _movement = GetComponent<CharacterMovement>();
             _selfDamage = GetComponent<CharacterDamage>();
             _animator = this.GetComponentInChildrenForSure<HeroAnimator>();
             _animationEventHandler = this.GetComponentInChildrenForSure<AnimationEventHandler>();
         }
 
-        private void OnEnable()
-        {
+        private void OnEnable() => 
             _animationEventHandler.Attacked += OnAttackHandled;
-        }
 
         private void OnDisable()
         {

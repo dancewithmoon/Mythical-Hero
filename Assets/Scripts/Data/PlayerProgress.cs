@@ -6,6 +6,7 @@ namespace Scripts.Data
     public class PlayerProgress : IReadOnlyPlayerProgress
     {
         public HealthData Health { get; } = new HealthData();
+        public int Damage;
     }
 
     public interface IReadOnlyPlayerProgress

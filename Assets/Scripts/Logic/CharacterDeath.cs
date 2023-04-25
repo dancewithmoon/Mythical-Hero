@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DG.Tweening;
 using Scripts.Logic.Animations;
 using Scripts.Utils;
 using UnityEngine;

@@ -9,5 +9,6 @@ namespace Scripts.StaticData.Service
     {
         Task Load();
         BaseScreen GetScreen(ScreenId screenId);
+        HeroDefaultStaticData GetHero();
     }
 }

@@ -25,6 +25,10 @@ MonoBehaviour:
     m_Address: UIRoot
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: b3d2cb5166a57aa4eaea39a04e542268
+    m_Address: HeroDefaultData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c27fffc7726bee24ca4f0a28048f2b3b, type: 2}
   m_SchemaSet:

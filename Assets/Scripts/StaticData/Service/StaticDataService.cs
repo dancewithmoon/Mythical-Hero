@@ -9,10 +9,12 @@ namespace Scripts.StaticData.Service
     public class StaticDataService : IStaticDataService
     {
         private const string ScreensPath = "Screens";
+        private const string HeroPath = "HeroDefaultData";
 
         private readonly IAssets _assets;
-        
+
         private Dictionary<ScreenId, BaseScreen> _screens;
+        private HeroDefaultStaticData _hero;
 
         public StaticDataService(IAssets assets)
         {
@@ -22,7 +24,8 @@ namespace Scripts.StaticData.Service
         public async Task Load()
         {
             await Task.WhenAll(
-                LoadScreens());
+                LoadScreens(),
+                LoadHeroDefaultData());
         }
 
         public BaseScreen GetScreen(ScreenId screenId) =>
@@ -30,10 +33,15 @@ namespace Scripts.StaticData.Service
                 ? screen
                 : null;
 
+        public HeroDefaultStaticData GetHero() => _hero;
+
         private async Task LoadScreens()
         {
             ScreenStaticData screensData = await _assets.Load<ScreenStaticData>(ScreensPath);
             _screens = new Dictionary<ScreenId, BaseScreen>(screensData.Screens);
         }
+
+        private async Task LoadHeroDefaultData() => 
+            _hero = await _assets.Load<HeroDefaultStaticData>(HeroPath);
     }
 }

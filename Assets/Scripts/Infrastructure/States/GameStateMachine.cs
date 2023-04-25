@@ -22,7 +22,7 @@ namespace Scripts.Infrastructure.States
                     new BootstrapState(this, sceneLoader, staticData),
                 
                 [typeof(LoadProgressState)] = 
-                    new LoadProgressState(this, progress, saveLoad),
+                    new LoadProgressState(this, progress, saveLoad, staticData),
                 
                 [typeof(LoadMainMenuState)] = 
                     new LoadMainMenuState(this, sceneLoader),
