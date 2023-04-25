@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Scripts.Infrastructure.AssetManagement;
 using Scripts.UI.Screens;
@@ -10,11 +11,13 @@ namespace Scripts.StaticData.Service
     {
         private const string ScreensPath = "Screens";
         private const string HeroPath = "HeroDefaultData";
+        private const string EnemiesPath = "EnemiesData";
 
         private readonly IAssets _assets;
 
         private Dictionary<ScreenId, BaseScreen> _screens;
         private HeroDefaultStaticData _hero;
+        private Dictionary<EnemyTypeId, EnemyStaticData> _enemies;
 
         public StaticDataService(IAssets assets)
         {
@@ -25,7 +28,8 @@ namespace Scripts.StaticData.Service
         {
             await Task.WhenAll(
                 LoadScreens(),
-                LoadHeroDefaultData());
+                LoadHeroDefaultData(),
+                LoadEnemiesData());
         }
 
         public BaseScreen GetScreen(ScreenId screenId) =>
@@ -35,6 +39,11 @@ namespace Scripts.StaticData.Service
 
         public HeroDefaultStaticData GetHero() => _hero;
 
+        public EnemyStaticData GetEnemy(EnemyTypeId enemyTypeId) =>
+            _enemies.TryGetValue(enemyTypeId, out EnemyStaticData enemy) 
+                ? enemy 
+                : null;
+
         private async Task LoadScreens()
         {
             ScreenStaticData screensData = await _assets.Load<ScreenStaticData>(ScreensPath);
@@ -43,5 +52,12 @@ namespace Scripts.StaticData.Service
 
         private async Task LoadHeroDefaultData() => 
             _hero = await _assets.Load<HeroDefaultStaticData>(HeroPath);
+        
+        private async Task LoadEnemiesData()
+        {
+            IEnumerable<EnemyStaticData> loaded = await _assets.LoadAll<EnemyStaticData>(EnemiesPath);
+            _enemies = loaded.ToDictionary(x => x.EnemyType, x => x);
+        }
+
     }
 }
