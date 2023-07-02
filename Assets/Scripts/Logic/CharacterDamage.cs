@@ -40,9 +40,12 @@ namespace Scripts.Logic
             
             _pushbackForce = amount;
             
-            StartCoroutine(ApplyDamageCoroutine());
-            
             _health.ApplyDamage(amount);
+
+            if(_health.Current <= 0)
+                return;
+            
+            StartCoroutine(ApplyDamageCoroutine());
         }
 
         private IEnumerator ApplyDamageCoroutine()
